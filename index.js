@@ -1,7 +1,21 @@
 require('dotenv').config();
 const axios = require('axios');
+const express = require('express');
 const { Client, GatewayIntentBits } = require('discord.js');
 
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Optional web server just to keep the app alive
+app.get('/', (req, res) => {
+    res.send('Bot is running!');
+});
+
+app.listen(PORT, () => {
+    console.log(`🌐 Web server running on port ${PORT}`);
+});
+
+// --- Discord Bot setup ---
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
